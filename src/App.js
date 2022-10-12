@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Route, Routes, useNavigate } from 'react-router-dom';
+import {Route, Routes, useNavigate, useParams } from 'react-router-dom';
 
 import './Styles/App.css';
 import MainPage from './Components/MainPage';
@@ -61,6 +61,7 @@ function App() {
    // handel page number for paginate---------------
    function handlePageChange(p) {
       navigate(`/${p}`)
+      // setPage(p || 1);
       setPage(p || 1);
    }
    // ----------------------------------------------
@@ -72,7 +73,6 @@ function App() {
       if(text === '' || undefined){
          getMovies()
       }else{
-
          const res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cd633d9d32696143e8a55048f1c5ebb6&
          language=ar&query=${text}&page=${page}&include_adult=false`)
          setMovies(res.data.results)
@@ -162,13 +162,13 @@ function App() {
    // Local storage managment ------------------------------------------
    useEffect( () =>{
       // get items from localstorage
-      const favoriteFromLocalStorage = localStorage.getItem('favorite-Movies') || [] // '[]'
-      // favoriteFromLocalStorage && setFavoriteMovie(JSON.parse(favoriteFromLocalStorage))
+      const favoriteFromLocalStorage = localStorage.getItem('favorite-Movies') || '[]' // '[]'
+      favoriteFromLocalStorage && setFavoriteMovie(JSON.parse(favoriteFromLocalStorage))
    },[])
 
       // set items to localstorage
    useEffect( () =>{
-      localStorage.setItem('favorite-Movies',JSON.stringify(favoriteMovie))
+      localStorage.setItem("favorite-Movies",JSON.stringify(favoriteMovie))
    })
 
 
