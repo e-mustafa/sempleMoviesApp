@@ -8,7 +8,8 @@ import NavbarMain from './Components/NavbarMain.jsx'
 import Favorite from './Components/Favorite';
 
 import axios from 'axios'
-import { Alert, Snackbar } from '@mui/material';
+import { Alert, Link, Snackbar } from '@mui/material';
+import Page404 from './Components/Page404';
 
 
 
@@ -178,7 +179,7 @@ function App() {
 
    const navigate = useNavigate()
    useEffect( () =>{
-      window.location.pathname === '/' && navigate(`/${1 || 1}`)
+      window.location.pathname === '/' && navigate(`${1 || 1}`)
    },[])
 
 
@@ -203,12 +204,14 @@ function App() {
             {/* <Route path='/' element={<MainPage movies={movies} page={page} setPage={setPage} pagesN={pagesN}
              results={results} text={text} />}
             /> */}
+            <Route path='/:value' element={<MainPage movies={movies} page={page} setPage={setPage} pagesN={pagesN}
+             results={results} text={text} handlePageChange={handlePageChange}/>}  />
 
             <Route path='/Movies/:id' element={<MovieDetails addItems={addItems} />} />
+            <Route path='/Page404' element={<Page404 />} />
 
-            <Route path='/:value' element={<MainPage movies={movies} page={page} setPage={setPage} pagesN={pagesN}
-             results={results} text={text} handlePageChange={handlePageChange}/>}
-            />
+
+
          </Routes>
       </Fragment>
    );
