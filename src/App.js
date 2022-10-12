@@ -163,7 +163,8 @@ function App() {
    useEffect( () =>{
       // get items from localstorage
       const favoriteFromLocalStorage = localStorage.getItem('favorite-Movies') || [] // '[]'
-      favoriteFromLocalStorage && setFavoriteMovie(JSON.parse(favoriteFromLocalStorage))
+      let newStorage = JSON.parse(favoriteFromLocalStorage)
+      favoriteFromLocalStorage && setFavoriteMovie(newStorage)
    },[])
 
       // set items to localstorage
