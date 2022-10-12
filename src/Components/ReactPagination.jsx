@@ -23,14 +23,6 @@ export const ReactPagination = ({page, setPage, pagesN, handlePageChange}) => {
 
 
 
-   useEffect(() => {
-      // setPage(pramsPage.value || 1);
-      // setPage(page || 1)
-      // handlePageChange(1)
-
-   },[pagesN])  // ,[pramsPage]
-
-
 
 
    return (
