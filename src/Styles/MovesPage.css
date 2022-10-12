@@ -1,0 +1,37 @@
+
+.movie-Parent{
+   position: relative !important;
+
+}
+
+.movie-Parent:hover ~ .movie-Data{
+   display: flex;
+
+}
+
+.movie-Data:hover{
+   display: flex !important;
+}
+
+.movie-Data{
+   display: none;
+   position: absolute !important;
+   top: 0%;
+   left: 0%;
+   background-color: rgb(20 20 20 / 50%);
+   /* animation: feadOut .5s ease-out reverse; */
+   animation: feadIn .2s ease-in forwards;
+}
+
+
+@keyframes feadIn {
+   from { left: -100% }
+   to { left: 0 }
+}
+
+@keyframes feadOut {
+   from { transform: scale(0%) }
+   to { transform: scale(100%) }
+}
+
+
