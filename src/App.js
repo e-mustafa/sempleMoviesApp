@@ -144,8 +144,6 @@ function App() {
       let newItem = item.filter(e => e.id !== m.id )
       // update
       setFavoriteMovie(newItem)
-      // setFavoriteMovieLength(favoriteMovie.length)
-
    }
 
 
