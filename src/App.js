@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Route, Routes, useNavigate, useParams } from 'react-router-dom';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 
 import './Styles/App.css';
 import MainPage from './Components/MainPage';
@@ -8,7 +8,7 @@ import NavbarMain from './Components/NavbarMain.jsx'
 import Favorite from './Components/Favorite';
 
 import axios from 'axios'
-import { Alert, Link, Snackbar } from '@mui/material';
+import { Alert, Snackbar } from '@mui/material';
 import Page404 from './Components/Page404';
 
 
@@ -208,7 +208,7 @@ function App() {
              results={results} text={text} handlePageChange={handlePageChange}/>}  />
 
             <Route path='/Movies/:id' element={<MovieDetails addItems={addItems} />} />
-            <Route path='/Page404' element={<Page404 />} />
+            <Route path='/*' element={<Page404 />} />
 
 
 
