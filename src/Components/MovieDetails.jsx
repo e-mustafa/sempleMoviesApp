@@ -6,15 +6,21 @@ import { FaHeart } from "react-icons/fa";
 
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux';
+import {addToFavorite, toggleSnackbar } from '../Redux/Action'
 
 
-
-const MovieDetails = ({addItems}) => {
+const MovieDetails = () => {
    const navigate = useNavigate()
    const pramsId = useParams()
 
+   const dispatch = useDispatch()
+
+   const favoriteMovie = useSelector(state => state.favoriteMovie)
+
    const [movieData, setMovieData] = useState()
    const [movieVideo, setMovieVideo] = useState()
+
 
    const getDetails = async ()=>{
       const res = await axios.get(`
@@ -42,6 +48,36 @@ const MovieDetails = ({addItems}) => {
       getDetails()
       getVideo()
    },[pramsId])
+
+
+
+
+
+
+   const addItems = (m) =>{
+      // colone
+      let items = favoriteMovie
+      // edit
+      let res = items.find(e => e.id === m.id)
+      if(res){
+         console.log('item in favorie');
+         dispatch(toggleSnackbar(true))
+         // handleClick()
+      }else{
+         items.push(m)
+         // update
+         dispatch(addToFavorite(items))
+      }
+      localStorage.setItem('favorite-Movies',JSON.stringify(favoriteMovie))
+   }
+
+
+
+
+
+
+
+
 
 
 
@@ -76,7 +112,7 @@ const MovieDetails = ({addItems}) => {
                      <Typography variant="h5"   > التقيم: {movieData && movieData.vote_average} </Typography>
 
                      <Box sx={{ width: '100%'}} px={4}>
-                        <LinearProgress variant="determinate" value={movieData && movieData.vote_average *10}
+                        <LinearProgress variant="determinate" value={(movieData && movieData.vote_average * 10) }
                          color='warning' sx={{transform:'rotate(180deg)'}} />
                      </Box>
 

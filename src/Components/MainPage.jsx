@@ -1,28 +1,24 @@
-import { Container, Typography } from '@mui/material'
 import React, {Fragment} from 'react'
+import { Container, Typography } from '@mui/material'
+
 import MovesPage from './MovesPage'
 // import PaginationMain from './PaginationMain'
 import { ReactPagination } from './ReactPagination'
 
+import { useSelector } from 'react-redux'
 
 
 
 
-export default function MainPage({movies, page, setPage, pagesN, results, text, handlePageChange}) {
+export default function MainPage() {
 
-
+   const text = useSelector(state => state.text)
+   const results = useSelector(state => state.results)
+   const pagesN = useSelector(state => state.pagesN)
 
 
    return (
       <Fragment>
-
-         {/* <Stack bgcolor='darkorange' alignItems='center' p={2}  >
-            <img src={noInternet} alt="no internet connection" />
-            <Typography  variant="h5" textAlign='right' color='teal' mb={4}>
-               Check your internet connection and reload this page
-            </Typography>
-         </Stack> */}
-
          {/* display if there are results  */}
          { text && (
             <Container>
@@ -36,14 +32,15 @@ export default function MainPage({movies, page, setPage, pagesN, results, text, 
             )
          }
 
-         <MovesPage movies={movies} />
+         <MovesPage  />
 
          {/* display Pagination if page number more than 1 page */}
          {pagesN > 1 &&
-            // <PaginationMain setPage={setPage}  page={page} pagesN={pagesN} />
-            <ReactPagination setPage={setPage}  page={page} pagesN={pagesN} handlePageChange={handlePageChange} />
+         <div>
+            <ReactPagination />
+            {/* <PaginationMain setPage={setPage}  page={page} pagesN={pagesN} /> */}
+         </div>
          }
-
       </Fragment>
   )
 }

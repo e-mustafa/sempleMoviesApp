@@ -1,17 +1,33 @@
 import React from 'react'
 import { Container, InputBase, Button, Badge, InputAdornment, IconButton } from '@mui/material';
 import { Box } from '@mui/system';
-
 import {Link, useNavigate} from 'react-router-dom'
+
 import { FaHeart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { handelText, toggleDrawer, getPageFromPaginate} from '../Redux/Action';
 
 
 
 
-export default function NavebarMain({setText, toggleDrawer, favoriteMovie, setPage, favoriteMovieLength, handlePageChange}) {
+
+export default function NavebarMain() {
+
    const navigate = useNavigate()
+   const dispatch = useDispatch()
+
+   const favoriteMovie = useSelector(state => state.favoriteMovie)
+
+
+
+   function handelChangeText(e){
+      dispatch(handelText(e))
+      // setText(e.currentTarget.value);
+      navigate(`/${1}`);
+      dispatch(getPageFromPaginate(1))
+   }
 
 
 
@@ -20,21 +36,18 @@ export default function NavebarMain({setText, toggleDrawer, favoriteMovie, setPa
          <Container>
             <Box display='flex' justifyContent='space-around' alignItems='center'>
 
-               <Button variant="text" color="error" onClick={toggleDrawer( true)}>
-                  <Badge badgeContent={favoriteMovieLength && favoriteMovieLength} color="info">
+               {/* <UpdateBadge /> */}
+               <Button variant="text" color="error" onClick={()=> {dispatch(toggleDrawer(true))}}>
+
+                  <Badge badgeContent={favoriteMovie && favoriteMovie.length} color="info">
                      <FaHeart title='Favorite list' fontSize='30px'/>
                   </Badge>
+
                </Button>
 
                <InputBase
                 sx={{ mx: 2,  bgcolor:'white', borderRadius:25, height:45, pr:2,  flexGrow:1 }} dir='rtl'
-                placeholder="بحث"
-                onChange={(e)=> {
-                  setText(e.currentTarget.value);
-                  navigate(`/1`);
-                  // setPage(pramsPage.value || 1)
-                  handlePageChange(1);
-                }}
+                placeholder="بحث" onChange={(e)=> handelChangeText(e.currentTarget.value)}
                 endAdornment={
                   <InputAdornment position="end">
                      <IconButton  aria-label="search" edge="end" >

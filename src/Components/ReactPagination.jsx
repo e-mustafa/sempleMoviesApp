@@ -1,21 +1,31 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Stack } from '@mui/system';
-
+import { useDispatch, useSelector } from 'react-redux';
 import Pagination from 'react-responsive-pagination';
+import { useNavigate} from 'react-router-dom';
+import { getPageFromPaginate} from '../Redux/Action';
+
 import '../Styles/ReactPagination.css'
 
 
-export const ReactPagination = ({page, setPage, pagesN, handlePageChange}) => {
+export const ReactPagination = () => {
+
+   const navigate = useNavigate()
+   const dispatch = useDispatch()
+   // const pramsPage = useParams()
 
 
-   // function handlePageChange(p) {
-   //    // ... do something with `page`
-   //    navigate(`/${p}`)
-   //    setPage(p || 1);
-   //    console.log(p);
-   // }
+   const pagesN = useSelector(state => state.pagesN)
+   const page = useSelector(state => state.page)
 
 
+
+   function handlePageChange(page) {
+      // ... do something with `page`
+      navigate(`/${page}`)
+      dispatch(getPageFromPaginate(page))
+      // setPage(page);
+   }
 
 
 
@@ -29,6 +39,7 @@ export const ReactPagination = ({page, setPage, pagesN, handlePageChange}) => {
           previousLabel='السابق'
           aria-current='page'
          />
+
       </Stack>
    )
 }

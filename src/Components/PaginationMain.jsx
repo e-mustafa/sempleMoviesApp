@@ -20,12 +20,12 @@ export default function PaginationMain({page, setPage, pagesN}) {
    }
 
    useEffect(() => {
-      setPage(pramsPage.value || 1); 
+      setPage(pramsPage.value || 1);
 
    })  // ,[pramsPage]
 
    return (
-      <Stack bgcolor='darkorange' alignItems='center' p={2}   >
+      <Stack bgcolor='darkorange' alignItems='center' p={2} mt={2}   >
 
          <Pagination  shape="rounded" variant="outlined"
           count={pagesN}

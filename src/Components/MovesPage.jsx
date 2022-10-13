@@ -1,20 +1,54 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Card, CardMedia, Container, Grid, LinearProgress, Typography } from '@mui/material'
 import '../Styles/MovesPage.css'
-
-// import { FaHeart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
+import {getMovies, searchMovies} from '../Redux/Action'
+import { useDispatch, useSelector } from 'react-redux';
 
 
-export default function MovesPage({movies, page}) {
+export default function MovesPage() {
+
+   const dispatch = useDispatch()
+
+   const text = useSelector(state => state.text)
+   const page = useSelector(state => state.page)
+   const pagesN = useSelector(state => state.pagesN)
+   const results = useSelector(state => state.results)
+   const movies = useSelector(state => state.movies)
+
+
+   const getMovesData = async (page, text)=>{
+      if(text === '' || undefined){
+         dispatch(getMovies(page))
+      }else{
+
+         dispatch(searchMovies(page, text))
+      }
+   }
+
+
+
+   useEffect( () =>{
+      getMovesData(page, text)
+   },[page, text])
+
+
+
+   const favoriteMovie = useSelector(state => state.favoriteMovie)
+
+   // set items to localstorage
+   useEffect( () =>{
+      localStorage.setItem('favorite-Movies',JSON.stringify(favoriteMovie))
+   })
+
 
 
 
    return (
       <Container>
             <Grid container spacing={{ xs: 2, md: 3, lg:3 }} my={8}  >
-            {movies.map((e) => (
+            {movies && movies.map((e) => (
                <Grid item xs={6} md={4} lg={3} key={e.id}>
 
                   <Card className='movie-Parent' sx={{height:'100%'}} >
