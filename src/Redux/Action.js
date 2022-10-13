@@ -34,31 +34,6 @@ export const searchMovies =  (page, text) =>{
 }
 
 
-// export const getDetails =  (id) =>{
-//    return async (dispatch) =>{
-//       const res = await axios.get(`
-//       https://api.themoviedb.org/3/movie/${id}?api_key=cd633d9d32696143e8a55048f1c5ebb6&language=ar`)
-//       dispatch({
-//          type: 'getDetails',
-//          getDetails: res.data,
-//       })
-//    }
-// }
-
-
-// export const getVideo =  (id) =>{
-//    return async (dispatch) =>{
-//       const res = await axios.get(`
-//       https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=cd633d9d32696143e8a55048f1c5ebb6&
-//       language=ar`)
-//       dispatch({
-//          type: 'getVideo',
-//          getVideo: res.data.results.AR || res.data.results.US
-//       })
-//    }
-// }
-
-
 
 
 
@@ -108,7 +83,7 @@ export  const clearFavorite = () =>{
    }
 }
 
-export  const updateLength = () =>{
+export  const updateLength = () =>{ // to update favorite badge count
    return{
       type: 'updateLength',
    }
@@ -116,7 +91,7 @@ export  const updateLength = () =>{
 
 
 
-export  const toggleDrawer = ( open) => {
+export  const toggleDrawer = ( open) => {   // open and close favorite list
    return{
       type: 'toggleDrawer',
       toggleDrawer: open
